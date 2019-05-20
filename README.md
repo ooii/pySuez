@@ -17,7 +17,8 @@ pySuez
 
 Get your consumption data from your Suez account (www.toutsurmoneau.fr) 
 
-This work is inspired by the domoticz sensor (https://github.com/Sirus10/domoticz), created by Sirus10 (https://github.com/Sirus10)
+This work is inspired by the domoticz sensor (https://github.com/Sirus10/domoticz), created by Sirus10 (https://github.com/Sirus10).
+It is also inspired by `pyLinky`(https://github.com/pirionfr/pyLinky) code from `Pirionfr` (https://github.com/pirionfr).
 
 Installation
 ------------

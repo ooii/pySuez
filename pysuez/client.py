@@ -57,7 +57,6 @@ class SuezClient():
 
     def _get_cookie(self):
         """Connect and get the cookie"""
-        #login = requests.Session()
         if self._session is None:
             self._session = requests.Session()
             
@@ -180,7 +179,6 @@ class SuezClient():
                 self._attributes['history'][item[3]] = int(
                     float(item[1])*1000)
 
-            #raise PySuezError("_attributes est %s", self._attributes)
 
         except ValueError:
             raise PySuezError("Issue with history data")
@@ -188,13 +186,11 @@ class SuezClient():
 
     def update(self):
         """Return the latest collected data from Linky."""
-        #self._get_token()
-        #self._get_cookie()
         self._fetch_data()
         if not self.success:
             return
+        print (self._attributes)
         return self._attributes
-        #_LOGGER.debug("Suez data state is: %s", self._state)
         
     def close_session(self):
         """Close current session."""

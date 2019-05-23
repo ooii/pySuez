@@ -20,7 +20,7 @@ setup(
       long_description=long_description,
       author='Farid N27',
       author_email='pySuezWater@ooii.io',
-      url='https://github.com/ooii/pySuezWater',
+      url='https://github.com/ooii/pySuez',
       package_data={'': ['LICENSE']},
       include_package_data=True,
       packages=find_packages(),

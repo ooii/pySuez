@@ -1,29 +1,15 @@
 
 pySuez
 =======
-
-.. image:: https://travis-ci.org/ooii/pySuez.svg?branch=master
-    :target: https://travis-ci.org/ooii/pySuez
-
-.. image:: https://img.shields.io/pypi/v/pySuez.svg
-    :target: https://pypi.python.org/pypi/pySuez
-
-.. image:: https://img.shields.io/pypi/pyversions/pySuez.svg
-    :target: https://pypi.python.org/pypi/pySuez
-
-.. image:: https://requires.io/github/ooii/pySuez/requirements.svg?branch=master
-    :target: https://requires.io/github/ooii/pySuez/requirements/?branch=master
-    :alt: Requirements Status
-
 Get your consumption data from your Suez account (www.toutsurmoneau.fr) 
 
-This work is inspired by the domoticz sensor (https://github.com/Sirus10/domoticz), created by Sirus10 (https://github.com/Sirus10).
-It is also inspired by `pyLinky`(https://github.com/pirionfr/pyLinky) code from `Pirionfr` (https://github.com/pirionfr).
+This work is inspired by the [Sirus](https://github.com/Sirus10)'s [domoticz sensor](https://github.com/Sirus10/domoticz).
+It is also inspired by [`pyLinky`](https://github.com/pirionfr/pyLinky) code from [`Pirionfr`](https://github.com/pirionfr).
 
 Installation
 ------------
 
-The easiest way to install the library is using `pip <https://pip.pypa.io/en/stable/>`_::
+The easiest way to install the library is using [`pip`](https://pip.pypa.io/en/stable/):
 
     pip install pySuez
 
@@ -44,5 +30,5 @@ Dev env
 -------
 create virtual env and install requirements
 
-    virtualenv -p /usr/bin/python3.5 env
+    virtualenv -p /usr/bin/python3.4 env
     pip install -r requirements.txt

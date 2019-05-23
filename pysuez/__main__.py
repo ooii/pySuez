@@ -17,7 +17,7 @@ def main():
 
     args = parser.parse_args()
 
-    client = LinkyClient(args.username, args.password)
+    client = SuezClient(args.username, args.password, args.counter_id)
 
     try:
     	client.update()

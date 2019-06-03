@@ -113,7 +113,7 @@ class SuezClient():
             self.success = True
 
         except ValueError:
-            raise PySuezError("Issue with this yesterday data")
+            raise PySuezError("Issue with yesterday data")
             pass
 
         try:
@@ -156,7 +156,7 @@ class SuezClient():
                     float(item[1])*1000)
 
         except ValueError:
-            raise PySuezError("Issue with this previous month data")
+            raise PySuezError("Issue with previous month data")
             pass
 
         try:

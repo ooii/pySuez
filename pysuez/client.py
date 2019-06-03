@@ -189,7 +189,6 @@ class SuezClient():
         self._fetch_data()
         if not self.success:
             return
-        print (self._attributes)
         return self._attributes
         
     def close_session(self):

@@ -26,6 +26,7 @@ def main():
         return 1
     finally:
         client.close_session()
+    print (client._attributes)
 
 if __name__ == '__main__':
     sys.exit(main())

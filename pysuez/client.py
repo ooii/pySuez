@@ -205,8 +205,8 @@ class SuezClient():
                                allow_redirects=False,
                                timeout=self._timeout
             )
-        if ('Connexion en cours') in response.content.decode() 
-            or ('se déconnecter') in response.content.decode():
+        if ('Connexion en cours') in response.content.decode() or 
+            ('se déconnecter') in response.content.decode():
             return True
         else:
             return False

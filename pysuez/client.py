@@ -23,11 +23,11 @@ class SuezClient():
         self._token = ''
         self._headers = {}
         self.data = {}
-        self._attributes = {}
+        self.attributes = {}
         self.success = False
         self._session = session
         self._timeout = timeout
-        self._state = 0
+        self.state = 0
 
     def _get_token(self):
         """Get the token"""
@@ -108,7 +108,7 @@ class SuezClient():
         data = requests.get(url, headers=self._headers)
 
         try:
-            self._state = int(float(data.json()[int(
+            self.state = int(float(data.json()[int(
                 yesterday_day)-1][1])*1000)
             self.success = True
 
@@ -125,9 +125,9 @@ class SuezClient():
                     )
                 data = requests.get(url, headers=self._headers)
 
-            self._attributes['thisMonthConsumption'] = {}
+            self.attributes['thisMonthConsumption'] = {}
             for item in data.json():
-                self._attributes['thisMonthConsumption'][item[0]] = int(
+                self.attributes['thisMonthConsumption'][item[0]] = int(
                     float(item[1])*1000)
 
         except ValueError:
@@ -150,9 +150,9 @@ class SuezClient():
 
             data = requests.get(url, headers=self._headers)
 
-            self._attributes['previousMonthConsumption'] = {}
+            self.attributes['previousMonthConsumption'] = {}
             for item in data.json():
-                self._attributes['previousMonthConsumption'][item[0]] = int(
+                self.attributes['previousMonthConsumption'][item[0]] = int(
                     float(item[1])*1000)
 
         except ValueError:
@@ -165,18 +165,18 @@ class SuezClient():
 
             data = requests.get(url, headers=self._headers)
             fetched_data = data.json()
-            self._attributes['highestMonthlyConsumption'] = int(
+            self.attributes['highestMonthlyConsumption'] = int(
                 float(fetched_data[-1])*1000)
             fetched_data.pop()
-            self._attributes['lastYearOverAll'] = int(
+            self.attributes['lastYearOverAll'] = int(
                 float(fetched_data[-1])*1000)
             fetched_data.pop()
-            self._attributes['thisYearOverAll'] = int(
+            self.attributes['thisYearOverAll'] = int(
                 float(fetched_data[-1])*1000)
             fetched_data.pop()
-            self._attributes['history'] = {}
+            self.attributes['history'] = {}
             for item in fetched_data:
-                self._attributes['history'][item[3]] = int(
+                self.attributes['history'][item[3]] = int(
                     float(item[1])*1000)
 
 
@@ -189,7 +189,7 @@ class SuezClient():
         self._fetch_data()
         if not self.success:
             return
-        return self._attributes
+        return self.attributes
         
     def close_session(self):
         """Close current session."""

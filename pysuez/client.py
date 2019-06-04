@@ -184,6 +184,33 @@ class SuezClient():
             raise PySuezError("Issue with history data")
             pass
 
+    def check_credentials(self):
+        if self._session is None:
+            self._session = requests.Session()
+            
+        self._get_token()
+        data = {
+            '_username': self._username,
+            '_password': self._password,
+            '_csrf_token': self._token,
+            'signin[username]': self._username,
+            'signin[password]': None,
+            'tsme_user_login[_username]': self._username,
+            'tsme_user_login[_password]': self._password
+                }
+        url = BASE_URI+API_ENDPOINT_LOGIN
+        response = requests.post(url,
+                               headers=self._headers, 
+                               data=data,
+                               allow_redirects=False,
+                               timeout=self._timeout
+            )
+        if ('Connexion en cours') in response.content.decode() 
+            or ('se déconnecter') in response.content.decode():
+            return True
+        else:
+            return False
+
     def update(self):
         """Return the latest collected data from Linky."""
         self._fetch_data()

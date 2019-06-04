@@ -209,7 +209,6 @@ class SuezClient():
             raise PySuezError("Can not submit login form.")
 
         if not 'eZSESSID' in self._session.cookies.get_dict():
-            raise PySuezError("Login error: Please check your username/password.")
             return False
         else:
             return True

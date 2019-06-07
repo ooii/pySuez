@@ -1,4 +1,4 @@
-simport requests
+import requests
 import re
 import datetime
 

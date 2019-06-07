@@ -111,6 +111,7 @@ class SuezClient():
             self.state = int(float(data.json()[int(
                 yesterday_day)-1][1])*1000)
             self.success = True
+            self.attributes['attribution'] = "Data provided by toutsurmoneau.fr"
 
         except ValueError:
             raise PySuezError("Issue with yesterday data")

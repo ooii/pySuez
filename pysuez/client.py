@@ -1,4 +1,4 @@
-import requests
+simport requests
 import re
 import datetime
 
@@ -199,19 +199,19 @@ class SuezClient():
             'tsme_user_login[_password]': self._password
                 }
         url = BASE_URI+API_ENDPOINT_LOGIN
-        try:
-            self._session.post(url,
-                               headers=self._headers,
+        response = requests.post(url,
+                               headers=self._headers, 
                                data=data,
                                allow_redirects=False,
-                               timeout=self._timeout)
-        except OSError:
-            raise PySuezError("Can not submit login form.")
-
-        if not 'eZSESSID' in self._session.cookies.get_dict():
-            return False
-        else:
+                               timeout=self._timeout
+            )
+        if (
+                ('Connexion en cours') in response.content.decode() or 
+                ('se déconnecter') in response.content.decode()
+                ):
             return True
+        else:
+            return False
 
     def update(self):
         """Return the latest collected data from Linky."""

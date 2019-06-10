@@ -42,7 +42,7 @@ class SuezClient():
 
         url = BASE_URI+API_ENDPOINT_LOGIN
 
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=self._timeout)
 
         headers['Cookie'] = ""
         for key in response.cookies.get_dict():

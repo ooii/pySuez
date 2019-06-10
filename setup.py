@@ -21,6 +21,7 @@ setup(
       author='Farid N27',
       author_email='pySuezWater@ooii.io',
       url='https://github.com/ooii/pySuez',
+      download_url='https://github.com/ooii/pySuez/releases/tag/0.1.18'
       package_data={'': ['LICENSE']},
       include_package_data=True,
       packages=find_packages(),

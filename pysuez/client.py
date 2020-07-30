@@ -50,7 +50,7 @@ class SuezClient():
                 headers['Cookie'] += "; "
             headers['Cookie'] += key + "=" + response.cookies[key]
 
-        phrase = re.compile('_csrf_token" value="(.*)" />')
+        phrase = re.compile('_csrf_token" value="(.*)"/>')
         result = phrase.search(response.content.decode('utf-8'))
         self._token = result.group(1)
         self._headers = headers

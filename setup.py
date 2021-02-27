@@ -31,7 +31,7 @@ setup(
           ]
       },
       license='Apache 2.0',
-      install_requires=['regex', 'requests', 'datetime'],
+      install_requires=['requests', 'datetime'],
       classifiers=[
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',

@@ -89,23 +89,41 @@ class SuezClient():
         
 
     def _fetch_data(self):
-        """Fetch latest data from Suez."""
-        now = datetime.datetime.now()
-        today_year = now.strftime("%Y")
-        today_month = now.strftime("%m")
-        yesterday = datetime.datetime.now() - datetime.timedelta(1)
-        yesterday_year = yesterday.strftime('%Y')
-        yesterday_month = yesterday.strftime('%m')
-        yesterday_day = yesterday.strftime('%d')
-        url = BASE_URI+API_ENDPOINT_DATA
-        url += '{}/{}/{}'.format(
-            yesterday_year,
-            yesterday_month, self._counter_id
-            )
-        
-        self._get_cookie()
 
-        data = requests.get(url, headers=self._headers)
+        data_not_fetched = True
+        iterations = 0
+        while data_not_fetched:
+            """Fetch latest data from Suez."""
+            now = datetime.datetime.now() - datetime.timedelta(iterations)
+            today_year = now.strftime("%Y")
+            today_month = now.strftime("%m")
+            yesterday = datetime.datetime.now() - datetime.timedelta(iterations+1)
+            yesterday_year = yesterday.strftime('%Y')
+            yesterday_month = yesterday.strftime('%m')
+            yesterday_day = yesterday.strftime('%d')
+            url = BASE_URI+API_ENDPOINT_DATA
+            url += '{}/{}/{}'.format(
+                yesterday_year,
+                yesterday_month, self._counter_id
+                )
+            
+            self._get_cookie()
+
+            data = requests.get(url, headers=self._headers)
+
+            # Check if data returned
+            data_json = data.json()
+            if data_json[0] == "ERR":
+                iterations = iterations + 1
+                continue
+            else:
+                # we have found some data, check if it overlaps the first day of the month and the last day of the previous month
+                if yesterday_month != today_month:
+                    # we're still at a month boundary, loop again one more time
+                    iterations = iterations + 1
+                    continue
+                else:
+                    data_not_fetched = False
 
         try:
             self.state = int(float(data.json()[int(

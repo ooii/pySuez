@@ -5,6 +5,7 @@ import datetime
 
 
 BASE_URI = 'https://www.toutsurmoneau.fr'
+# BASE_URI = ''
 API_ENDPOINT_LOGIN = '/mon-compte-en-ligne/je-me-connecte'
 API_ENDPOINT_DATA = '/mon-compte-en-ligne/statJData/'
 API_ENDPOINT_HISTORY = '/mon-compte-en-ligne/statMData/'
@@ -15,11 +16,12 @@ class PySuezError(Exception):
 class SuezClient():
     """Global variables."""
 
-    def __init__(self, username, password, counter_id, session=None, timeout=None):
+    def __init__(self, username, password, counter_id, provider, session=None, timeout=None):
         """Initialize the client object."""
         self._username = username
         self._password = password
         self._counter_id = counter_id
+        self._provider = provider
         self._token = ''
         self._headers = {}
         self.data = {}
@@ -39,7 +41,10 @@ class SuezClient():
             'Connection': 'keep-alive',
             'Cookie': ''
         }
+        global BASE_URI
 
+        if self._provider == "Eau Olivet":
+            BASE_URI = 'https://www.eau-olivet.fr'
         url = BASE_URI+API_ENDPOINT_LOGIN
 
         response = requests.get(url, headers=headers, timeout=self._timeout)

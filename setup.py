@@ -16,7 +16,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
       name='pysuez',
       version='0.1.20',
-      description='Get your water consumption data from your Suez account (www.toutsurmoneau.fr)',
+      description='Get your water consumption data from your Suez account (www.toutsurmoneau.fr or www.eau-olivet.fr)',
       long_description=long_description,
       author='Farid N27',
       author_email='pySuezWater@ooii.io',

@@ -15,7 +15,7 @@ def main():
     parser.add_argument('-c', '--counter_id',
                         required=True, help='Counter Id')
     parser.add_argument('-P', '--provider',
-                        required=True, help='Provider name')    
+                        required=False, help='Provider name')    
 
     args = parser.parse_args()
 

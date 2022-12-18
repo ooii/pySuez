@@ -76,20 +76,26 @@ class SuezClient():
             'tsme_user_login[_password]': self._password
                 }
         url = BASE_URI+API_ENDPOINT_LOGIN
+        
         try:
-            self._session.post(url,
+            response = self._session.post(url,
                                headers=self._headers, 
                                data=data,
-                               allow_redirects=False,
+                               allow_redirects=True,
                                timeout=self._timeout)
         except OSError:
             raise PySuezError("Can not submit login form.")
+
+        # Get the URL after possible redirect
+        m = re.match('https?://([^/]+)/',response.url)
+        self._hostname = m.group(1)
 
         if not 'eZSESSID' in self._session.cookies.get_dict():
             raise PySuezError("Login error: Please check your username/password.")
         
         self._headers['Cookie'] = ''
-        self._headers['Cookie'] = 'eZSESSID='+self._session.cookies.get("eZSESSID")
+        session_id=self._session.cookies.get(name="eZSESSID",domain=self._hostname)
+        self._headers['Cookie'] = 'eZSESSID='+session_id
         return True
         
 

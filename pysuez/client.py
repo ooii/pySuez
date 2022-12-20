@@ -16,7 +16,7 @@ class PySuezError(Exception):
 class SuezClient():
     """Global variables."""
 
-    def __init__(self, username, password, counter_id, provider, session=None, timeout=None):
+    def __init__(self, username, password, counter_id, provider=None, session=None, timeout=None):
         """Initialize the client object."""
         self._username = username
         self._password = password

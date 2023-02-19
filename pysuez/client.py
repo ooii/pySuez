@@ -55,7 +55,8 @@ class SuezClient():
                 headers['Cookie'] += "; "
             headers['Cookie'] += key + "=" + response.cookies[key]
 
-        phrase = re.compile('_csrf_token" value="(.*)"/>')
+        # Feb 2023 : SUEZ changed token name and encoding. Changed regex accordingly
+        phrase = re.compile('.u0022csrfToken.u0022.u003A.u0022(.*).u0022,')
         result = phrase.search(response.content.decode('utf-8'))
         self._token = result.group(1)
         self._headers = headers

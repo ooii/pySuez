@@ -31,6 +31,20 @@ class SuezClient():
         self._timeout = timeout
         self.state = 0
 
+    def _get_token_1(self, content):
+        phrase = re.compile('csrf_token(.*)')
+        result = phrase.search(content)
+        if result is None:
+            return None
+        return result.group(1)
+
+    def _get_token_2(self, content):
+        phrase = re.compile('csrfToken\\\\u0022\\\\u003A\\\\u0022(.*)\\\\u0022,\\\\u0022')
+        result = phrase.search(content)
+        if result is None:
+            return None
+        return result.group(1).encode().decode('unicode_escape')
+
     def _get_token(self):
         """Get the token"""
         headers = {
@@ -55,10 +69,11 @@ class SuezClient():
                 headers['Cookie'] += "; "
             headers['Cookie'] += key + "=" + response.cookies[key]
 
-        phrase = re.compile('_csrf_token" value="(.*)"/>')
-        result = phrase.search(response.content.decode('utf-8'))
-        self._token = result.group(1)
         self._headers = headers
+        decoded_content = response.content.decode('utf-8')
+        self._token = self._get_token_1(decoded_content) or self._get_token_2(decoded_content)
+        if self._token is None:
+            raise PySuezError("Can't get token.")
 
     def _get_cookie(self):
         """Connect and get the cookie"""

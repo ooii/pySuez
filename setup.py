@@ -15,13 +15,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
       name='pysuez',
-      version='0.1.20',
+      version='0.1.31',
       description='Get your water consumption data from your Suez account (www.toutsurmoneau.fr or www.eau-olivet.fr)',
       long_description=long_description,
       author='Farid N27',
       author_email='pySuezWater@ooii.io',
       url='https://github.com/ooii/pySuez',
-      download_url='https://github.com/ooii/pySuez/releases/tag/0.1.18',
+      download_url='https://github.com/ooii/pySuez/releases/tag/0.1.31',
       package_data={'': ['LICENSE']},
       include_package_data=True,
       packages=find_packages(),
@@ -36,5 +36,8 @@ setup(
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: 3.9',
       ]
 )
